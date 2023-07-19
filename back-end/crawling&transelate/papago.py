@@ -3,8 +3,6 @@ import json
 import urllib.request
 from secret import client_id, client_secret
 
-
-
 def get_translate(text):
     lang = get_lang(text)
     data = "source="+ str(lang) +"&target=ko&text=" + text
@@ -36,5 +34,3 @@ def get_lang(text):
     else:
         print("Error Code:" + rescode)
 
-
-print(get_translate(""))

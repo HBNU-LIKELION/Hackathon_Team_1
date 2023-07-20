@@ -24,26 +24,6 @@ def USA():
 
 
 def Japan():
-    url = 'https://www.asahi.com/'
-    page = requests.get(url)
-    soup = BeautifulSoup(page.content, 'html.parser')
-    
-    title = soup.select_one('#MainInner > div > div > div.l-row__main.l-row__main--topNews > div.l-section.p-topNews > div > div.l-section__body.p-soraNormal > div.c-articleModule.p-topNews__firstNews > a').text
-    img = soup.select_one('#MainInner > div > div > div.l-row__main.l-row__main--topNews > div.l-section.p-topNews > div > div.l-section__body.p-soraNormal > div.c-articleModule.p-topNews__firstNews > div > figure > a > img')['src']
-    url =  soup.select_one('#MainInner > div > div > div.l-row__main.l-row__main--topNews > div.l-section.p-topNews > div > div.l-section__body.p-soraNormal > div.c-articleModule.p-topNews__firstNews > a')['href']   
-    title = get_translate(str(title))
-
-    result = {
-        'country': 'Japan',
-        'title': title,
-        'img': img,
-        'url': 'https://www.asahi.com' + url
-    }
-    json_val = json.dumps(result, ensure_ascii=False)
-    return str(json_val)
-
-
-def Japan():
     url = 'https://www.yomiuri.co.jp/'
     page = requests.get(url)
     soup = BeautifulSoup(page.content, 'html.parser')

@@ -1,7 +1,7 @@
 import requests
 import json
 import urllib.request
-from secret import client_id, client_secret
+from secret import *
 
 def get_translate(text):
     lang = get_lang(text)

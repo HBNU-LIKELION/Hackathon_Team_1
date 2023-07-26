@@ -1,8 +1,7 @@
+
 import requests
 from bs4 import BeautifulSoup
 from papago import *
-import json
-
 
 def USA():
     url = 'https://edition.cnn.com/us'
@@ -224,4 +223,35 @@ def Korea():
     }
     return result
 
-print(India())
+import sqlite3
+# 이전 데이터 삭제
+con = sqlite3.connect('./db.sqlite3')
+cursor_db = con.cursor()
+cursor_db.execute('DELETE FROM issue_api_issue')
+con.commit()
+
+
+response = requests.post("http://127.0.0.1:8000/Issue/", json=USA())
+response = requests.post("http://127.0.0.1:8000/Issue/", json=Japan())
+response = requests.post("http://127.0.0.1:8000/Issue/", json=India())
+response = requests.post("http://127.0.0.1:8000/Issue/", json=France())
+# response = requests.post("http://127.0.0.1:8000/Issue/", json=Canada()) # 문제있음
+# response = requests.post("http://127.0.0.1:8000/Issue/", json=Germany()) # 유료임
+response = requests.post("http://127.0.0.1:8000/Issue/", json=UK())
+response = requests.post("http://127.0.0.1:8000/Issue/", json=Italy())
+# response = requests.post("http://127.0.0.1:8000/Issue/", json=Brazil()) # 문제있음
+response = requests.post("http://127.0.0.1:8000/Issue/", json=Korea())
+
+
+
+
+# USA() 
+# Japan() 
+# India()
+# France()
+# Canada()
+# Germany()
+# UK()
+# Italy()
+# Brazil()
+# Korea()

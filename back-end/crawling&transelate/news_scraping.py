@@ -105,7 +105,7 @@ def Canada():
     return result
 
 
-# def Rusia():
+# def Russia():
 #     url = 'https://iz.ru/'
 #     page = requests.get(url)
 #     soup = BeautifulSoup(page.content, 'html.parser')
@@ -125,13 +125,13 @@ def Canada():
 #     return str(json_val)
 
 def Germany():
-    url = 'https://www.welt.de/'
+    url = 'https://www.faz.net/aktuell/'
     page = requests.get(url)
     soup = BeautifulSoup(page.content, 'html.parser')
-    
-    title = soup.select_one('#main > section.c-stage.c-stage--default.has-contrasting-background > div.u-grid-container.c-stage__teasers > div.u-grid-item.is-grid-col-mobile-s-12.is-first > article > div > div.c-teaser__body > h4 > a').text
-    img = soup.select_one('#main > section.c-stage.c-stage--default.has-contrasting-background > div.u-grid-container.c-stage__teasers > div.u-grid-item.is-grid-col-mobile-s-12.is-first > article > header > div > picture > img')['src']
-    url =  soup.select_one('#main > section.c-stage.c-stage--default.has-contrasting-background > div.u-grid-container.c-stage__teasers > div.u-grid-item.is-grid-col-mobile-s-12.is-first > article > div > div.c-teaser__body > h4 > a')['href']
+    img=url
+    title = soup.select_one('#TOP > div.Home > div.o-ModuleWrapper.o-ModuleWrapper-has-more-bottom-gap.o-ModuleWrapper-is-tsr-top1 > article > div.o-Grid > div > div > div > div.o-Grid_Col.o-Grid_Col-8 > div > div > div > a > header > h2 > span.tsr-Base_HeadlineText').text
+    img = soup.select_one('#TOP > div.Home > div.o-ModuleWrapper.o-ModuleWrapper-has-more-bottom-gap.o-ModuleWrapper-is-tsr-top1 > article > div.tsr-Base_MediaWrapper.btn-Wrapper > img')['src']
+    url =  soup.select_one('#TOP > div.Home > div.o-ModuleWrapper.o-ModuleWrapper-has-more-bottom-gap.o-ModuleWrapper-is-tsr-top1 > article > div.o-Grid > div > div > div > div.o-Grid_Col.o-Grid_Col-8 > div > div > div > a')['href']
     title = re.sub(r"^\s+|\s+$", "", title)
     title = get_translate(str(title))
 
@@ -139,7 +139,7 @@ def Germany():
         'country': 'Germany',
         'title': title,
         'img': img,
-        'url': 'https://www.welt.de/' + url
+        'url': url
     }
     return result
 
@@ -191,11 +191,11 @@ def Brazil():
     page = requests.get(url)
     soup = BeautifulSoup(page.content, 'html.parser')
     
-    title = soup.select_one('#app > div > div:nth-child(7) > section:nth-child(2) > div > div > div:nth-child(2) > div > div.col-24.col-lg-15 > div > div > div:nth-child(1) > div > div.col-24.col-lg-16 > div > div.col-24.col-lg-12.sectionGrid__grid__columnOne > article:nth-child(1) > a').text
-    img = soup.select_one('#app > div > div:nth-child(7) > section:nth-child(2) > div > div > div:nth-child(2) > div > div.col-24.col-lg-15 > div > div > div:nth-child(1) > div > div.col-24.col-lg-16 > div > div.col-24.col-lg-12.sectionGrid__grid__columnOne > article:nth-child(1) > a > figure > picture > img')['src']
-    url =  soup.select_one('#app > div > div:nth-child(7) > section:nth-child(2) > div > div > div:nth-child(2) > div > div.col-24.col-lg-15 > div > div > div:nth-child(1) > div > div.col-24.col-lg-16 > div > div.col-24.col-lg-12.sectionGrid__grid__columnOne > article:nth-child(1) > a')['href']   
+    title = soup.select_one('#lkj543zr').text    
+    img = soup.select_one('#app > div > div:nth-child(7) > section:nth-child(2) > div > div > div:nth-child(2) > div > div.col-24.col-lg-15 > article > a > figure > picture > img')['src']    
+    url =  soup.select_one('#app > div > div:nth-child(7) > section:nth-child(2) > div > div > div:nth-child(2) > div > div.col-24.col-lg-15 > article > a')['href']       
     title = re.sub(r"^\s+|\s+$", "", title)
-    title = get_translate(str(title))
+    # title = get_translate(str(title))
 
     result = {
         'country': 'Brazil',
@@ -203,6 +203,7 @@ def Brazil():
         'img': img,
         'url': url
     }
+    
     return result
 
 
@@ -224,4 +225,5 @@ def Korea():
     }
     return result
 
-print(India())
+print(Brazil())
+print(Germany())

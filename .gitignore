@@ -383,3 +383,4 @@ $RECYCLE.BIN/
 
 # papago userdata
 back-end/crawling&transelate/secret.py
+back-end/world_issue_api/papago.py

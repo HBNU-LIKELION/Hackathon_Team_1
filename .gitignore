@@ -1,6 +1,9 @@
 # Created by https://www.toptal.com/developers/gitignore/api/Macos,Windows,VisualStudioCode,Python,react,WebStorm
 # Edit at https://www.toptal.com/developers/gitignore?templates=Macos,Windows,VisualStudioCode,Python,react,WebStorm
 
+.idea
+package-lock.json
+
 ### macOS ###
 # General
 .DS_Store

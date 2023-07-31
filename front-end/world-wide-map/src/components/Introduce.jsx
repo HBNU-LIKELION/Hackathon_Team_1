@@ -2,8 +2,9 @@ import React from "react";
 import earth from "../assets/지구본1.png";
 import earthBackground from "../assets/지구배경.png";
 import "../App.css";
-import "./introduce.css"
+import "./introduce.css";
 import styled from "styled-components";
+import {Link} from "react-router-dom";
 
 
 export default function Introduce() {
@@ -18,10 +19,11 @@ export default function Introduce() {
     cursor: pointer;
     border-radius: 7px;
     font-size: 20px;
-    &:hover{
+
+    &:hover {
       background-color: #8de3dd;
     }
-    
+  
   
   `;
   
@@ -37,18 +39,20 @@ export default function Introduce() {
     
     <div className="my-component">
       <br/>
-      <h1 style={{color:"white"}}>World Wide Hot Topic!</h1>
+      <h1 style={{color: "white"}}>World Wide Hot Topic!</h1>
       
       <div id="box">
         
-        <h3 style={{color:"white"}}>전 세계 실시간 뉴스들을 한눈에 모아보세요!</h3>
+        <h3 style={{color: "white"}}>전 세계 실시간 뉴스들을 한눈에 모아보세요!</h3>
         
         <img src={earth} width="300px" className="App-logo"/>
       
       </div>
-      <Button>
-        <b>시작하기</b>
-      </Button>
+      <Link to="/worldmap">
+        <Button>
+          <b>시작하기</b>
+        </Button>
+      </Link>
     </div>
   
   );

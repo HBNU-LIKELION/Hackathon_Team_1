@@ -1,0 +1,10 @@
+.worldMap {
+    background-image: url("../assets/세계지도.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 1024px;
+    height: 768px;
+    /* 화면 높이만큼 이미지를 채우려면 필요한 스타일입니다. */
+
+}

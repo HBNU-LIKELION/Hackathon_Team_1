@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
-import {getData} from "../../service/getData";
-import Card from "../../components/Card";
-import worldMap from "../../assets/worldMapImage.png";
+import {getData} from "../service/getData";
+import Card from "../components/Card";
+import worldMap from "../assets/worldMapImage.png";
 import styled from "styled-components";
 
 
@@ -15,7 +15,7 @@ export default function WorldMap() {
     align-items: center;
     width: 100vw;
     height: 100vh;
-    background-image: url(${require("../../assets/worldMapBackgroundImage.png")});
+    background-image: url(${require("../assets/worldMapBackgroundImage.png")});
     background-size: auto;
     background-position: center;
     background-repeat: repeat;

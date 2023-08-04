@@ -42,7 +42,6 @@ export default function Card({data, itemStyle, truncateTitle, getCountryFlag}) {
   return (
 
     <Fragment>
-      <h1>그 외 기사들</h1>
       <CardContainer>
         {data.map((item) => (
           <CardItem key={item.id} style={itemStyle}>

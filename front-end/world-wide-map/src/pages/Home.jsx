@@ -1,13 +1,26 @@
-import React from "react";
+import React, {useState} from "react";
 import globe from "../assets/globe.png";
 import styled from "styled-components";
 import {Link} from "react-router-dom";
+import Modal from "../components/Modal";
+import WorldMap from "./WorldMap";
 
 
 export default function Home() {
+  //Modal 관련 코드 start
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+  
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+  //Modal 관련 코드 end
   
   const Button = styled.button`
-    
+
     width: 50%;
     padding: 13px;
     border: none;
@@ -40,24 +53,32 @@ export default function Home() {
     
     <div className="my-component">
       <Background>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <h1 style={{color: "white"}}>World Wide Hot Topic!</h1>
-      
-      <div id="box">
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <h1 style={{color: "white"}}>World Wide Hot Topic!</h1>
         
-        <h3 style={{color: "white"}}>전 세계 실시간 뉴스들을 한눈에 모아보세요!</h3>
+        <div id="box">
+          
+          <h3 style={{color: "white"}}>전 세계 실시간 뉴스들을 한눈에 모아보세요!</h3>
+          
+          <img src={globe} width="300px" alt=""/>
+        </div>
         
-        <img src={globe} width="300px"  alt=""/>
-      </div>
-      <Link to="/worldmap">
-        <Button>
-          <b>시작하기</b>
+        
+        <Button onClick={() => {
+          handleOpenModal();
+        }}>
+          <b>서비스 소개 보기</b>
         </Button>
-      </Link>
-        </Background>
+        <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+          <h2>전 세계의 실시간 핫 토픽을 체험해보세요!</h2>
+          <p>소개멘트 소개멘트 소개멘트 소개멘트 소개멘트 소개멘트</p>
+        </Modal>
+      
+      </Background>
+    
     </div>
   );
 }

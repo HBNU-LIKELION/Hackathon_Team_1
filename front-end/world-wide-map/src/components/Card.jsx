@@ -16,6 +16,7 @@ export default function Card({data}) {
       border: 2px solid black;
       position: relative;
       transition: transform 0.75s;
+      font-size: 17px;
 
       &:hover {
         transform: translateY(-20px);
@@ -42,8 +43,15 @@ export default function Card({data}) {
     const CardContent = styled.div`
       height: 15%;
       padding: 10px;
-      font-size: 2.3vw; // 글자 크기를 viewport 너비의 3%로 설정하는 과정
     `;
+
+    const Title = styled.div`
+    font-size: 28px; 
+  `;
+
+    const Country = styled.span`
+    font-size: 17px; // 고정된 글자 크기 설정
+  `;
 
     //TODO : src의 alt 속성에 들어갈 이미지 필요
     return (
@@ -52,11 +60,10 @@ export default function Card({data}) {
                 <IconWrapper>{getCountryFlag(data.country)}</IconWrapper>
                 <CardImage src={data.img} alt="추후 수정 필요"/>
                 <CardContent>
-                    {truncateTitle(data.title)}
+                    <Title>{truncateTitle(data.title)}</Title>
                     <br />
-                    <span style={{ fontSize: "17px" }}>국가 : {data.country}</span>
+                    <Country>국가 : {data.country}</Country>
                 </CardContent>
-
             </CardItem>
         </Fragment>
     );

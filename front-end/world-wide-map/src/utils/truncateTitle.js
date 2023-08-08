@@ -1,6 +1,6 @@
-export const truncateTitle = (title, maxLength) => {
-  if (title.length > maxLength) {
-    return title.substring(0, maxLength) + '...';
-  }
-  return title;
+export const truncateTitle = (title) => {
+    if (title.length < 15) {
+        return title + '...';
+    }
+    return title.substring(0, 15) + '...';
 };

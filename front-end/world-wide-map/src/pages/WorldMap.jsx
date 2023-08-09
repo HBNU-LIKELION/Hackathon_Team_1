@@ -4,27 +4,7 @@ import worldMap from "../assets/worldMapImage.png";
 import styled from "styled-components";
 import {getNewsData} from "../service/getNewsData";
 
-
 export default function WorldMap() {
-
-    const WorldMapStyle = styled.div`
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 100vw;
-      height: 100vh;
-      background-image: url(${require("../assets/worldMapBackgroundImage.png")});
-      background-size: auto;
-      background-position: center;
-      background-repeat: repeat;
-    `;
-
-    const CardsContainer = styled.div`
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-  `;
-
     const [newsData, setNewsData] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const cardsPerPage = 6;
@@ -49,6 +29,24 @@ export default function WorldMap() {
 
     const startIndex = (currentPage - 1) * cardsPerPage;
     const endIndex = startIndex + cardsPerPage;
+  
+  const WorldMapStyle = styled.div`
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100vw;
+      height: 100vh;
+      background-image: url(${require("../assets/worldMapBackgroundImage.jpeg")});
+      background-size: auto;
+      background-position: center;
+      background-repeat: repeat;
+    `;
+  
+  const CardsContainer = styled.div`
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  `;
 
     return (
         <div>

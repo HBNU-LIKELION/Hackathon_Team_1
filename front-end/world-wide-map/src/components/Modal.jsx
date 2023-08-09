@@ -1,8 +1,17 @@
 import React from "react";
 import styled, {keyframes} from "styled-components";
 
-
-const slideIn = keyframes`
+export default function Modal({isOpen, onClose, onButtonClick, buttonText, children}) {
+  const handleButtonClick = () => {
+    onClose();
+    onButtonClick();
+  };
+  
+  if (!isOpen) {
+    return undefined;
+  }
+  
+  const slideIn = keyframes`
   from {
     transform: translateY(100%);
   }
@@ -10,8 +19,8 @@ const slideIn = keyframes`
     transform: translateY(0);
   }
 `;
-
-const ModalOverlay = styled.div`
+  
+  const ModalOverlay = styled.div`
   position: fixed;
   top: 0;
   left: 0;
@@ -23,20 +32,12 @@ const ModalOverlay = styled.div`
   justify-content: center;
   animation: ${slideIn} 0.3s ease-out;
 `;
-
-const ModalContent = styled.div`
+  
+  const ModalContent = styled.div`
   background-color: white;
   padding: 20px;
   border-radius: 8px;
 `;
-
-const Modal = ({ isOpen, onClose, onButtonClick, buttonText, children }) => {
-  const handleButtonClick = () => {
-    onClose();
-    onButtonClick();
-  };
-  
-  if (!isOpen) return undefined;
   
   return (
     <ModalOverlay>
@@ -47,6 +48,3 @@ const Modal = ({ isOpen, onClose, onButtonClick, buttonText, children }) => {
     </ModalOverlay>
   );
 };
-
-
-export default Modal;

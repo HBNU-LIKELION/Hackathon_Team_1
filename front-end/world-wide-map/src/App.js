@@ -5,6 +5,8 @@ import {Route, Routes} from "react-router-dom";
 import PatchVisitCount from "./service/patchVisitCount";
 import Modal from "./components/Modal";
 import React from "react";
+import Detail from "./components/Detail";
+import Articletest from "./Test/Articletest";
 
 
 function App() {
@@ -20,6 +22,7 @@ function App() {
       </Routes>
     {/*<PatchVisitCount/>*/}
     
+    {/*<Articletest />*/}
     
     </div>
   );

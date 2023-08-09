@@ -1,6 +1,6 @@
 import React from "react";
 import styled, {keyframes} from "styled-components";
-import {Link} from "react-router-dom";
+
 
 const slideIn = keyframes`
   from {
@@ -30,16 +30,19 @@ const ModalContent = styled.div`
   border-radius: 8px;
 `;
 
-const Modal = ({isOpen, onClose, children}) => {
+const Modal = ({ isOpen, onClose, onButtonClick, buttonText, children }) => {
+  const handleButtonClick = () => {
+    onClose();
+    onButtonClick();
+  };
+  
   if (!isOpen) return undefined;
   
   return (
     <ModalOverlay>
       <ModalContent>
         {children}
-        <Link to="/worldmap">
-          <button onClick={onClose}>시작하기</button>
-        </Link>
+        <button onClick={handleButtonClick}>{buttonText}</button>
       </ModalContent>
     </ModalOverlay>
   );

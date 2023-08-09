@@ -1,14 +1,17 @@
 import React, {useState} from "react";
 import globe from "../assets/globe.png";
 import styled from "styled-components";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import Modal from "../components/Modal";
 import WorldMap from "./WorldMap";
+import minimap from "../assets/minimap.png";
 
 
 export default function Home() {
   //Modal 관련 코드 start
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate();
+  
   
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -17,6 +20,12 @@ export default function Home() {
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
+  const handleModalButtonClick = () => {
+    
+    navigate("/worldmap");
+    
+  };
+  
   //Modal 관련 코드 end
   
   const Button = styled.button`
@@ -50,7 +59,6 @@ export default function Home() {
   
   return (
     
-    
     <div className="my-component">
       <Background>
         <br/>
@@ -72,9 +80,19 @@ export default function Home() {
         }}>
           <b>서비스 소개 보기</b>
         </Button>
-        <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+        <Modal
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+          onButtonClick={handleModalButtonClick}
+          buttonText="더 보기"
+        >
           <h2>전 세계의 실시간 핫 토픽을 체험해보세요!</h2>
-          <p>소개멘트 소개멘트 소개멘트 소개멘트 소개멘트 소개멘트</p>
+          <p style={{fontWeight: "bold"}}>NBA는 News Broad Anywhere의 약자로, 전 세계의 실시간 뉴스들을 한 눈에 모아볼 수 있는 비영리 서비스입니다.</p>
+          <p style={{fontWeight: "bold"}}>세계적으로 핫한 기사들이 지도에 Pin으로 고정되어 있습니다.</p>
+          <p style={{fontWeight: "bold"}}>클릭해서 펼쳐보세요!</p>
+          <img src={minimap} alt=""/>
+          
+        
         </Modal>
       
       </Background>

@@ -35,33 +35,34 @@ export default function Card({data}) {
     const CardImage = styled.img`
       width: 100%;
       height: 85%;
+      
       object-fit: cover;
       border-radius: 7px 7px 0 0;
       z-index: 1;
     `;
 
     const CardContent = styled.div`
-      height: 15%;
+      height: 20%;
       padding: 10px;
     `;
 
     const Title = styled.div`
-    font-size: 28px; 
+    font-size: 28px;
   `;
 
     const Country = styled.span`
-    font-size: 17px; // 고정된 글자 크기 설정
+    font-size: 15px; // 고정된 글자 크기 설정
   `;
 
     //TODO : src의 alt 속성에 들어갈 이미지 필요
     return (
         <Fragment>
             <CardItem key={data.id}>
+              <CardImage src={data.img} alt="추후 수정 필요"/>
                 <IconWrapper>{getCountryFlag(data.country)}</IconWrapper>
-                <CardImage src={data.img} alt="추후 수정 필요"/>
                 <CardContent>
                     <Title>{truncateTitle(data.title)}</Title>
-                    <br />
+                  
                     <Country>국가 : {data.country}</Country>
                 </CardContent>
             </CardItem>

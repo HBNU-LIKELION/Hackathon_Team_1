@@ -3,7 +3,7 @@ import globe from "../assets/globe.png";
 import styled from "styled-components";
 import {useNavigate} from "react-router-dom";
 import Modal from "../components/Modal";
-import minimap from "../assets/minimap.png";
+import minimap from "../assets/miniWorldMapImage.png";
 
 export default function Home() {
   

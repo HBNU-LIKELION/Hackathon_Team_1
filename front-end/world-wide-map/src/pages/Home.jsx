@@ -1,10 +1,20 @@
 import React, {useState} from "react";
 import globe from "../assets/globe.png";
-import styled from "styled-components";
+import styled, {keyframes} from "styled-components";
 import {useNavigate} from "react-router-dom";
 import Modal from "../components/Modal";
 import minimap from "../assets/miniWorldMapImage.png";
 
+
+
+const rotate = keyframes` // 애니메이션은 컴포넌트 위에 선언
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(360deg);
+  }
+`;
 export default function Home() {
   
   //TODO: Home에서 Modal.jsx를 렌더링하는 로직 변경 필요
@@ -51,15 +61,23 @@ export default function Home() {
     height: 100vh;
   `;
   
+  const RotatingImage = styled.img` // rotate 애니메이션을 적용할 이미지 컴포넌트
+  animation: ${rotate} 4s linear infinite; // 애니메이션 속성 설정
+  width: 300px;
+`;
+  
+  
   return (
     
     <div className="my-component">
+      
       <Background>
         <h1 style={{color: "white", paddingTop: "80px"}}>World Wide Hot Topic!</h1>
         
         <div id="box">
           <h3 style={{color: "white"}}>전 세계 실시간 뉴스들을 한눈에 모아보세요!</h3>
-          <img src={globe} width="300px" alt=""/>
+          {/*<img src={globe} width="300px" alt=""/>*/}
+          <RotatingImage src={globe} alt="Rotating Globe" />
         </div>
         
         <Button onClick={() => {
@@ -67,7 +85,6 @@ export default function Home() {
         }}>
           <b>서비스 소개 보기</b>
         </Button>
-        
         <Modal
           isOpen={isModalOpen}
           onClose={handleCloseModal}

@@ -18,6 +18,15 @@ const blinkAnimation = keyframes`
     opacity: 1;
   }
 `;
+const fadeIn = keyframes` // fadeIn 애니메이션 정의
+                            from {
+                              opacity: 0;
+                            }
+                            to {
+                              opacity: 1;
+                            }
+`;
+
 
 export default function WorldMap() {
   const [newsData, setNewsData] = useState([]);
@@ -42,8 +51,8 @@ export default function WorldMap() {
       const top3 = sortedData.slice(0, 3);
       const dotData = top3.map((item) => ({
         id: item.id,
-        top: coordsData[item.id-1].top,
-        left: coordsData[item.id-1].left,
+        top: coordsData[item.id - 1].top,
+        left: coordsData[item.id - 1].left,
         zIndex: item.id,
         size: item.visit_count * 2,
       }));
@@ -92,7 +101,7 @@ export default function WorldMap() {
     background-image: url(${worldMapImage});
     background-size: cover;
     background-position: center;
-  `
+  `;
   const RedDot = styled.div`
     position: absolute;
     width: ${(props) => Math.min(props.size, props.maxSize)}px; // 최대 크기 제한
@@ -105,30 +114,37 @@ export default function WorldMap() {
     z-index: ${(props) => props.zIndex};
   `;
   
+  const FadeInWrapper = styled.div`
+    animation: ${fadeIn} 1s ease-in-out;
+  `;
+  
+  
   return (
     <div>
-      <WorldMapStyle>
-        <WorldMapImageStyle>
-          {redDots.map((circle) => (
-            <RedDot
-              key={circle.id}
-              top={circle.top}
-              left={circle.left}
-              zIndex={circle.zIndex}
-              size={circle.size}
-              maxSize={30}
-            />
+      <FadeInWrapper>
+        <WorldMapStyle>
+          <WorldMapImageStyle>
+            {redDots.map((circle) => (
+              <RedDot
+                key={circle.id}
+                top={circle.top}
+                left={circle.left}
+                zIndex={circle.zIndex}
+                size={circle.size}
+                maxSize={30}
+              />
+            ))}
+          </WorldMapImageStyle>
+        </WorldMapStyle>
+        <h1>그 외 기사들</h1>
+        <CardsContainer >
+          {newsData.slice(startIndex, endIndex).map((data) => (
+            <Card key={data.id} data={data}/>
           ))}
-        </WorldMapImageStyle>
-      </WorldMapStyle>
-      <h1>그 외 기사들</h1>
-      <CardsContainer>
-        {newsData.slice(startIndex, endIndex).map((data) => (
-          <Card key={data.id} data={data}/>
-        ))}
-      </CardsContainer>
-      <button onClick={handlePrevPage}>이전</button>
-      <button onClick={handleNextPage}>다음</button>
+        </CardsContainer>
+        <button onClick={handlePrevPage}>이전</button>
+        <button onClick={handleNextPage}>다음</button>
+      </FadeInWrapper>
     </div>
   );
 }

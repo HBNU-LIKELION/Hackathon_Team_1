@@ -1,15 +1,28 @@
-import React, {Fragment} from "react";
+import React, {Fragment, useState} from "react";
 import styled from "styled-components";
 import {truncateTitle} from "../utils/truncateTitle";
 import {getCountryFlag} from "../utils/getCountryFlag";
 import {useNavigate} from "react-router-dom";
+import Modal from "./Modal";
+import Detail from "./Detail";
+import ModalDetail from "./ModalDetail";
 
 export default function Card({data}) {
   
-  const navigate = useNavigate();
-  const handleCardClick = () => {
-    navigate(`/detail/${data.id}`, {state: data});
+  const [modalOpen, setModalOpen] = useState(false);
+  
+  const closeModal = () => {
+    setModalOpen(false);
   };
+  
+  const openModal = () => {
+    setModalOpen(true);
+  };
+  
+  // const navigate = useNavigate();
+  // const handleCardClick = () => {
+  //   navigate(`/detail/${data.id}`, {state: data});
+  // };
   
   const CardItem = styled.div`
     display: flex;
@@ -64,7 +77,7 @@ export default function Card({data}) {
   //TODO : src의 alt 속성에 들어갈 이미지 필요
   return (
     <Fragment>
-      <CardItem key={data.id} onClick = {handleCardClick}>
+      <CardItem key={data.id} onClick={openModal}>
         <CardImage src={data.img} alt="추후 수정 필요"/>
         <IconWrapper>{getCountryFlag(data.country)}</IconWrapper>
         <CardContent>

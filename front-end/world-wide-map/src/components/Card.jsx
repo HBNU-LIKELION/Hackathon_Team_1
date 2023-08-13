@@ -16,7 +16,7 @@ export default function Card({data}) {
     flex-direction: column;
     align-items: center;
     width: 100%;
-    max-width: 400px;
+    max-width: 325px;
     height: 450px;
     text-align: center;
     border-radius: 7px;

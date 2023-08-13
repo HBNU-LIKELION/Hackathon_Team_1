@@ -4,6 +4,7 @@ import Card from "../components/Card";
 import worldMapImage from "../assets/worldMapImage.png";
 import worldMapBackgroundImage from "../assets/worldMapBackgroundImage.jpeg";
 import {getNewsData} from "../service/getNewsData";
+import {getCountryFlag} from "../utils/getCountryFlag";
 import {coordsData} from "../utils/coordsData";
 
 // Notice: 이 애니메이션 정의는 컴포넌트 밖에 정의해야함.
@@ -20,32 +21,34 @@ const blinkAnimation = keyframes`
 `;
 
 // fadeIn 애니메이션 정의
-const fadeIn = keyframes`
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-`;
+// const fadeIn = keyframes`
+//   from {
+//     opacity: 0;
+//   }
+//   to {
+//     opacity: 1;
+//   }
+// `;
 
 export default function WorldMap() {
   const [newsData, setNewsData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const cardsPerPage = 3;
-  
+
+  const [hoveredDotId, setHoveredDotId] = useState(null);
+
   useEffect(() => {
     async function fetchData() {
       const data = await getNewsData();
       setNewsData(data);
     }
-    
+
     fetchData();
   }, []);
-  
+
   // RedDot 설정 시작
   const [redDots, setRedDots] = useState([]);
-  
+
   useEffect(() => {
     if (newsData.length > 0) {
       const sortedData = newsData.slice().sort((a, b) => b.visit_count - a.visit_count);
@@ -55,28 +58,30 @@ export default function WorldMap() {
         top: coordsData[item.id - 1].top,
         left: coordsData[item.id - 1].left,
         zIndex: item.id,
+        title: item.title,
+        country: item.country,
         size: item.visit_count * 2,
       }));
       setRedDots(dotData);
     }
   }, [newsData]);
   // RedDot 설정 끝
-  
+
   // 페이지 핸들링 과정 시작
   const totalPageCount = Math.ceil(newsData.length / cardsPerPage);
-  
+
   const handleNextPage = () => {
     setCurrentPage((prevPage) => (prevPage === totalPageCount ? 1 : prevPage + 1));
   };
-  
+
   const handlePrevPage = () => {
     setCurrentPage((prevPage) => (prevPage === 1 ? totalPageCount : prevPage - 1));
   };
-  
+
   const startIndex = (currentPage - 1) * cardsPerPage;
   const endIndex = startIndex + cardsPerPage;
   // 페이징 핸들링 과정 끝
-  
+
   const WorldMapStyle = styled.div`
     display: flex;
     justify-content: center;
@@ -88,7 +93,7 @@ export default function WorldMap() {
     background-position: center;
     background-repeat: repeat;
   `;
-  
+
   const CardsContainer = styled.div`
     display: inline-grid;
     grid-template-columns: repeat(3, 1fr);
@@ -96,7 +101,7 @@ export default function WorldMap() {
     column-gap: 100px;
   
   `;
-  
+
   const WorldMapImageStyle = styled.div`
     position: relative;
     width: 1200px;
@@ -105,24 +110,43 @@ export default function WorldMap() {
     background-size: cover;
     background-position: center;
   `;
+
   const RedDot = styled.div`
     position: absolute;
     width: ${(props) => Math.min(props.size, props.maxSize)}px; // 최대 크기 제한
     height: ${(props) => Math.min(props.size, props.maxSize)}px; // 최대 크기 제한
     background-color: red;
     border-radius: 50%;
-    animation: ${blinkAnimation} 2s infinite;
+    animation: ${props => (props.isHovered ? "none" : blinkAnimation)} 2s infinite; /* hover 상태일 때는 애니메이션 끄기 */
     top: ${(props) => props.top};
     left: ${(props) => props.left};
     z-index: ${(props) => props.zIndex};
-  `;
-  
-  const FadeInWrapper = styled.div`
-    animation: ${fadeIn} 1s ease-in-out;
-  `;
-  
-  const Button = styled.button`
+    cursor: pointer;
 
+    &:hover {
+      cursor: zoom-in;
+    }
+
+    &:hover::after {
+      content: "${(props) => getCountryFlag(props.country)} ${(props) => props.title}";
+      position: absolute;
+      bottom: 110%;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: rgba(0, 0, 0, 0.8);
+      color: white;
+      padding: 8px;
+      border-radius: 4px;
+      font-size: 25px;
+      white-space: nowrap;
+    }
+  `;
+
+  // const FadeInWrapper = styled.div`
+  //   animation: ${fadeIn} 1s ease-in-out;
+  // `;
+
+  const Button = styled.button`
     width: 75px;
     padding: 13px;
     display: inline;
@@ -134,22 +158,22 @@ export default function WorldMap() {
     border-radius: 7px;
     font-size: 20px;
     margin: 0px 35px;
-
-
+    
     &:hover {
       background-color: #8de3dd;
     }
   `;
+
   const Flex = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
     height: 700px;
   `;
-  
+
   return (
     <div>
-      <FadeInWrapper>
+      {/*<FadeInWrapper>*/}
         <WorldMapStyle>
           <WorldMapImageStyle>
             {redDots.map((circle) => (
@@ -159,17 +183,22 @@ export default function WorldMap() {
                 left={circle.left}
                 zIndex={circle.zIndex}
                 size={circle.size}
+                title={circle.title}
+                country={circle.country}
                 maxSize={30}
+                isHovered={hoveredDotId === circle.id} // hoveredDotId는 state로 관리되는 값
+                onMouseEnter={() => setHoveredDotId(circle.id)}
+                onMouseLeave={() => setHoveredDotId(null)}
               />
             ))}
           </WorldMapImageStyle>
         </WorldMapStyle>
-      </FadeInWrapper>
+      {/*</FadeInWrapper>*/}
       <br/>
-      
+
       {/*TODO: ?. 옵셔널 체이닝 연산자 사용 시 정상 동작 -> 왜 그런지?*/}
       {/*<h1>{newsData[1].created_at}</h1>*/}
-      
+
       <h1>최신 업데이트 : {newsData[1]?.created_at} </h1>
       <Flex>
         <div>

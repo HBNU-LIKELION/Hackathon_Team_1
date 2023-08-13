@@ -35,7 +35,7 @@ export default function Home() {
   
   const Button = styled.button`
 
-    width: 50%;
+    width: 30%;
     padding: 13px;
     border: none;
     background-color: #66CCC5;
@@ -72,18 +72,16 @@ export default function Home() {
     <div className="my-component">
       
       <Background>
-        <h1 style={{color: "white", paddingTop: "80px"}}>World Wide Hot Topic!</h1>
+        <p style={{color: "white", paddingTop: "80px", fontStyle:"italic",fontSize:"48px"}}><font style={{color:"#66CCC5"}}>N</font>ews <font style={{color:"#66CCC5"}}>B</font>road <font style={{color:"#66CCC5"}}>A</font>nywhere !</p>
         
         <div id="box">
-          <h3 style={{color: "white"}}>전 세계 실시간 뉴스들을 한눈에 모아보세요!</h3>
-          {/*<img src={globe} width="300px" alt=""/>*/}
           <RotatingImage src={globe} alt="Rotating Globe" />
         </div>
         
         <Button onClick={() => {
           handleOpenModal();
         }}>
-          <b>서비스 소개 보기</b>
+          <b>How to use?</b>
         </Button>
         <Modal
           isOpen={isModalOpen}
@@ -91,12 +89,9 @@ export default function Home() {
           onButtonClick={handleModalButtonClick}
           buttonText="더 보기"
         >
-          <h2>전 세계의 실시간 핫 토픽을 체험해보세요!</h2>
-          <p style={{fontWeight: "bold"}}>NBA는 News Broad Anywhere의 약자로, 전 세계의 실시간 뉴스들을 한 눈에 모아볼 수 있는 비영리 서비스입니다.</p>
-          <p style={{fontWeight: "bold"}}>세계적으로 핫한 기사들이 지도에 Pin으로 고정되어 있습니다.</p>
-          <p style={{fontWeight: "bold"}}>클릭해서 펼쳐보세요!</p>
+          <p style={{fontWeight: "bold"}}>세계지도의 빨간 점은 조회수 Top 3 지역을 보여줍니다. </p>
+          <p style={{fontWeight: "bold"}}>마우스를 올려 펼쳐보세요!</p>
           <img src={minimap} alt=""/>
-        
         </Modal>
       </Background>
     </div>

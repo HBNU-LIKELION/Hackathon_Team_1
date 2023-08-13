@@ -5,6 +5,7 @@ import worldMapImage from "../assets/worldMapImage.png";
 import worldMapBackgroundImage from "../assets/worldMapBackgroundImage.jpeg";
 import {getNewsData} from "../service/getNewsData";
 import {coordsData} from "../utils/coordsData";
+import ModalDetail from "../components/ModalDetail";
 
 // Notice: 이 애니메이션 정의는 컴포넌트 밖에 정의해야함.
 const blinkAnimation = keyframes`
@@ -118,9 +119,21 @@ export default function WorldMap() {
     animation: ${fadeIn} 1s ease-in-out;
   `;
   
+  const [modalOpen, setModalOpen] = useState(false);
+  
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+  
+  const openModal = () => {
+    setModalOpen(true);
+  };
+  
+  
   
   return (
     <div>
+      
       <FadeInWrapper>
         <WorldMapStyle>
           <WorldMapImageStyle>
@@ -134,17 +147,24 @@ export default function WorldMap() {
                 maxSize={30}
               />
             ))}
-          </WorldMapImageStyle>
+        
+        
+      </WorldMapImageStyle>
         </WorldMapStyle>
-        <h1>그 외 기사들</h1>
-        <CardsContainer >
-          {newsData.slice(startIndex, endIndex).map((data) => (
-            <Card key={data.id} data={data}/>
-          ))}
-        </CardsContainer>
-        <button onClick={handlePrevPage}>이전</button>
-        <button onClick={handleNextPage}>다음</button>
+        <div>
+          <br/>
+          <br/>
+          <CardsContainer>
+            {newsData.slice(startIndex, endIndex).map((data) => (
+              <Card key={data.id} data={data} onClick={openModal}/>
+            ))}
+          </CardsContainer>
+          <button onClick={handlePrevPage}>이전</button>
+          <button onClick={handleNextPage}>다음</button>
+          {/*<ModalDetail isOpen={modalOpen} onClose={closeModal} data={newsData} />*/}
+        </div>
       </FadeInWrapper>
+      
     </div>
   );
 }

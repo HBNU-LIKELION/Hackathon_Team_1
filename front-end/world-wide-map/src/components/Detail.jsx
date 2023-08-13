@@ -2,13 +2,16 @@ import React from "react";
 import {Link, useLocation} from "react-router-dom";
 import styled from "styled-components";
 import {getCountryFlag} from "../utils/getCountryFlag";
-import {ImArrowRight, ImArrowRight2} from "react-icons/im";
+import {ImArrowRight2} from "react-icons/im";
 
 export default function Detail() {
   
   const location = useLocation();
   const cardData = location.state;
   const originalUrl = cardData.url;
+  if (!cardData) {
+    return <div>Loading or Error message...</div>; // 혹은 원하는 UI 표시
+  }
   
   const Title = styled.div`
     margin-top: 20px;

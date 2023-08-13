@@ -89,9 +89,11 @@ export default function WorldMap() {
   `;
   
   const CardsContainer = styled.div`
-    display: grid;
+    display: inline-grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    row-gap: 20px;
+    column-gap: 250px;
+  
   `;
   
   const WorldMapImageStyle = styled.div`
@@ -136,15 +138,25 @@ export default function WorldMap() {
             ))}
           </WorldMapImageStyle>
         </WorldMapStyle>
-        <h1>그 외 기사들</h1>
-        <CardsContainer >
-          {newsData.slice(startIndex, endIndex).map((data) => (
-            <Card key={data.id} data={data}/>
-          ))}
-        </CardsContainer>
-        <button onClick={handlePrevPage}>이전</button>
-        <button onClick={handleNextPage}>다음</button>
       </FadeInWrapper>
+      <br/>
+      
+      {/*TODO: ?. 옵셔널 체이닝 연산자 사용 시 정상 동작 -> 왜 그런지?*/}
+      {/*<h1>{newsData[1].created_at}</h1>*/}
+      
+      <h1>{newsData[1]?.created_at} 부로 최신화 된 기사</h1>
+      <br/>
+      <button onClick={handlePrevPage} style={{display: "inline"}}>이전</button>
+      <CardsContainer>
+        {newsData.slice(startIndex, endIndex).map((data) => (
+          <Card key={data.id} data={data}/>
+        ))}
+      </CardsContainer>
+      <button onClick={handleNextPage} style={{display: "inline"}}>다음</button>
+      <div>
+      
+      
+      </div>
     </div>
   );
 }

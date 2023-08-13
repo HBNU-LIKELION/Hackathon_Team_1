@@ -18,20 +18,21 @@ const blinkAnimation = keyframes`
     opacity: 1;
   }
 `;
-const fadeIn = keyframes` // fadeIn 애니메이션 정의
-                            from {
-                              opacity: 0;
-                            }
-                            to {
-                              opacity: 1;
-                            }
-`;
 
+// fadeIn 애니메이션 정의
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
 
 export default function WorldMap() {
   const [newsData, setNewsData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const cardsPerPage = 6;
+  const cardsPerPage = 3;
   
   useEffect(() => {
     async function fetchData() {
@@ -92,7 +93,7 @@ export default function WorldMap() {
     display: inline-grid;
     grid-template-columns: repeat(3, 1fr);
     row-gap: 20px;
-    column-gap: 250px;
+    column-gap: 100px;
   
   `;
   
@@ -120,6 +121,31 @@ export default function WorldMap() {
     animation: ${fadeIn} 1s ease-in-out;
   `;
   
+  const Button = styled.button`
+
+    width: 75px;
+    padding: 13px;
+    display: inline;
+    border: none;
+    background-color: #66CCC5;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 7px;
+    font-size: 20px;
+    margin: 0px 35px;
+
+
+    &:hover {
+      background-color: #8de3dd;
+    }
+  `;
+  const Flex = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 700px;
+  `;
   
   return (
     <div>
@@ -144,19 +170,20 @@ export default function WorldMap() {
       {/*TODO: ?. 옵셔널 체이닝 연산자 사용 시 정상 동작 -> 왜 그런지?*/}
       {/*<h1>{newsData[1].created_at}</h1>*/}
       
-      <h1>{newsData[1]?.created_at} 부로 최신화 된 기사</h1>
-      <br/>
-      <button onClick={handlePrevPage} style={{display: "inline"}}>이전</button>
-      <CardsContainer>
-        {newsData.slice(startIndex, endIndex).map((data) => (
-          <Card key={data.id} data={data}/>
-        ))}
-      </CardsContainer>
-      <button onClick={handleNextPage} style={{display: "inline"}}>다음</button>
-      <div>
-      
-      
-      </div>
+      <h1>최신 업데이트 : {newsData[1]?.created_at} </h1>
+      <Flex>
+        <div>
+          <Button onClick={handlePrevPage}>이전</Button>
+        </div>
+        <CardsContainer>
+          {newsData.slice(startIndex, endIndex).map((data) => (
+            <Card key={data.id} data={data}/>
+          ))}
+        </CardsContainer>
+        <div>
+          <Button onClick={handleNextPage}>다음</Button>
+        </div>
+      </Flex>
     </div>
   );
 }

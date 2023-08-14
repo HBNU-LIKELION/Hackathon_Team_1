@@ -1,14 +1,40 @@
 import React, {useEffect, useState} from "react";
-import {getNewsData} from "../service/getNewsData";
 import styled, {keyframes} from "styled-components";
+import Card from "../components/Card";
 import worldMapBackgroundImage from "../assets/worldMapBackgroundImage.jpeg";
 import worldMapImage from "../assets/worldMapImage.png";
-import Card from "../components/Card";
+import {getNewsData} from "../service/getNewsData";
+import {getCountryFlag} from "../utils/getCountryFlag";
 import {coordsData} from "../utils/coordsData";
 
-export default function WorldMapTest() {
+// Notice: 이 애니메이션 정의는 컴포넌트 밖에 정의해야함.
+const blinkAnimation = keyframes`
+  0%, 50% {
+    opacity: 1;
+  }
+  25%, 75% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`;
+
+// fadeIn 애니메이션 정의
+// const fadeIn = keyframes`
+//   from {
+//     opacity: 0;
+//   }
+//   to {
+//     opacity: 1;
+//   }
+// `;
+
+export default function WorldMap() {
   const [newsData, setNewsData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [hoveredDotId, setHoveredDotId] = useState(null);
+  const [redDots, setRedDots] = useState([]);
   const cardsPerPage = 6;
   
   useEffect(() => {
@@ -20,6 +46,26 @@ export default function WorldMapTest() {
     fetchData();
   }, []);
   
+  // RedDot 설정 시작
+  useEffect(() => {
+    if (newsData.length > 0) {
+      const sortedData = newsData.slice().sort((a, b) => b.visit_count - a.visit_count);
+      const top3 = sortedData.slice(0, 3);
+      const dotData = top3.map((item) => ({
+        id: item.id,
+        top: coordsData[item.id - 1].top,
+        left: coordsData[item.id - 1].left,
+        zIndex: item.id,
+        title: item.title,
+        country: item.country,
+        size: item.visit_count * 2,
+      }));
+      setRedDots(dotData);
+    }
+  }, [newsData]);
+  // RedDot 설정 끝
+  
+  // 페이지 핸들링 과정 시작
   const totalPageCount = Math.ceil(newsData.length / cardsPerPage);
   
   const handleNextPage = () => {
@@ -32,21 +78,7 @@ export default function WorldMapTest() {
   
   const startIndex = (currentPage - 1) * cardsPerPage;
   const endIndex = startIndex + cardsPerPage;
-  
-  useEffect(() => {
-    if (newsData.length > 0) {
-      const sortedData = newsData.slice().sort((a, b) => b.visit_count - a.visit_count);
-      const top3 = sortedData.slice(0, 3);
-      const dotData = top3.map((item) => ({
-        id: item.id,
-        top: coordsData[item.id - 1].top,
-        left: coordsData[item.id - 1].left,
-        zIndex: item.id,
-        size: item.visit_count * 2,
-      }));
-    }
-  }, [newsData]);
-  // RedDot 설정 끝
+  // 페이징 핸들링 과정 끝
   
   const WorldMapStyle = styled.div`
     display: flex;
@@ -59,6 +91,7 @@ export default function WorldMapTest() {
     background-position: center;
     background-repeat: repeat;
   `;
+  
   const WorldMapImageStyle = styled.div`
     position: relative;
     width: 1200px;
@@ -68,6 +101,41 @@ export default function WorldMapTest() {
     background-size: cover;
     background-position: center;
   `;
+  
+  const RedDot = styled.div`
+    position: absolute;
+    width: ${(props) => Math.min(props.size, props.maxSize)}px; // 최대 크기 제한
+    height: ${(props) => Math.min(props.size, props.maxSize)}px; // 최대 크기 제한
+    background-color: red;
+    border-radius: 50%;
+    animation: ${props => (props.isHovered ? "none" : blinkAnimation)} 2s infinite; /* hover 상태일 때는 애니메이션 끄기 */
+    top: ${(props) => props.top};
+    left: ${(props) => props.left};
+    z-index: ${(props) => props.zIndex};
+    cursor: pointer;
+
+    &:hover {
+      cursor: zoom-in;
+    }
+
+    &:hover::after {
+      content: "${(props) => getCountryFlag(props.country)} ${(props) => props.title}";
+      position: absolute;
+      bottom: 110%;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: rgba(0, 0, 0, 0.8);
+      color: white;
+      padding: 8px;
+      border-radius: 4px;
+      font-size: 25px;
+      white-space: nowrap;
+    }
+  `;
+  
+  // const FadeInWrapper = styled.div`
+  //   animation: ${fadeIn} 1s ease-in-out;
+  // `;
   
   const Button = styled.button`
 
@@ -87,12 +155,14 @@ export default function WorldMapTest() {
       background-color: #8de3dd;
     }
   `;
+  
   const CardsContainer = styled.div`
     display: inline-grid;
     grid-template-columns: repeat(3, 1fr);
     row-gap: 20px;
     column-gap: 100px;
   `;
+  
   const Flex = styled.div`
     display: flex;
     flex-direction: column;
@@ -100,6 +170,8 @@ export default function WorldMapTest() {
   
   return (
     <div>
+      {/*<FadeInWrapper>*/}
+      {/*</FadeInWrapper>*/}
       
       <WorldMapStyle>
         
@@ -108,7 +180,29 @@ export default function WorldMapTest() {
         </div>
         
         <Flex>
-          <WorldMapImageStyle/>
+          <WorldMapImageStyle>
+            {redDots.map((circle) => (
+              <RedDot
+                key={circle.id}
+                top={circle.top}
+                left={circle.left}
+                zIndex={circle.zIndex}
+                size={circle.size}
+                title={circle.title}
+                country={circle.country}
+                maxSize={30}
+                isHovered={hoveredDotId === circle.id} // hoveredDotId는 state로 관리되는 값
+                onMouseEnter={() => setHoveredDotId(circle.id)}
+                onMouseLeave={() => setHoveredDotId(null)}
+              />
+            ))}
+          </WorldMapImageStyle>
+          
+          {/*TODO: ?. 옵셔널 체이닝 연산자 사용 시 정상 동작 -> 왜 그런지?*/}
+          {/*<h1>최신 업데이트 : {newsData[1].created_at} </h1>*/}
+          <h1 style={{color: "white"}}>최신 업데이트 : {newsData[1]?.created_at.slice(0, 10)} </h1>
+          <br/>
+          <br/>
           
           <CardsContainer>
             {newsData.slice(startIndex, endIndex).map((data) => (

@@ -6,6 +6,7 @@ import worldMapImage from "../assets/worldMapImage.png";
 import {getNewsData} from "../service/getNewsData";
 import {getCountryFlag} from "../utils/getCountryFlag";
 import {coordsData} from "../utils/coordsData";
+import {truncateTitle} from "../utils/truncateTitle";
 
 // Notice: 이 애니메이션 정의는 컴포넌트 밖에 정의해야함.
 const blinkAnimation = keyframes`
@@ -114,18 +115,34 @@ export default function WorldMap() {
     z-index: ${(props) => props.zIndex};
     cursor: pointer;
 
+    &::after {
+      content: "! ! !";
+      position: absolute;
+      bottom: 110%;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: rgba(0, 0, 0, 0);
+      color: black;
+      font-weight: bold;
+      padding: 8px;
+      border-radius: 4px;
+      font-size: 25px;
+      white-space: nowrap;
+    }
+    
     &:hover {
       cursor: zoom-in;
     }
 
     &:hover::after {
-      content: "${(props) => getCountryFlag(props.country)} ${(props) => props.title}";
+      content: "${(props) => getCountryFlag(props.country)}  ${(props) => truncateTitle(props.title)}";
       position: absolute;
       bottom: 110%;
       left: 50%;
       transform: translateX(-50%);
       background-color: rgba(0, 0, 0, 0.8);
       color: white;
+      font-weight: normal;
       padding: 8px;
       border-radius: 4px;
       font-size: 25px;

@@ -3,15 +3,23 @@ import styled from "styled-components";
 import {truncateTitle} from "../utils/truncateTitle";
 import {getCountryFlag} from "../utils/getCountryFlag";
 import {useNavigate} from "react-router-dom";
+import {postRequest} from "../service/postRequest";
 
 export default function Card({data}) {
   
   const navigate = useNavigate();
-  
-  const handleCardClick = () => {
-    navigate(`/detail/${data.id}`, {state: data});
+
+  const handleCardClick = async () => {
+    try {
+      await postRequest(data);
+
+      navigate(`/detail/${data.id}`, { state: data });
+
+    } catch (error) {
+      console.error('POST 실패:', error);
+    }
   };
-  
+
   const CardItem = styled.div`
     display: flex;
     flex-direction: column;

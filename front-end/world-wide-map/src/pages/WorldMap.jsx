@@ -42,10 +42,10 @@ export default function WorldMap() {
       const data = await getNewsData();
       setNewsData(data);
     }
-    
+
     fetchData();
   }, []);
-  
+
   // RedDot 설정 시작
   useEffect(() => {
     if (newsData.length > 0) {
@@ -64,22 +64,22 @@ export default function WorldMap() {
     }
   }, [newsData]);
   // RedDot 설정 끝
-  
+
   // 페이지 핸들링 과정 시작
   const totalPageCount = Math.ceil(newsData.length / cardsPerPage);
-  
+
   const handleNextPage = () => {
     setCurrentPage((prevPage) => (prevPage === totalPageCount ? 1 : prevPage + 1));
   };
-  
+
   const handlePrevPage = () => {
     setCurrentPage((prevPage) => (prevPage === 1 ? totalPageCount : prevPage - 1));
   };
-  
+
   const startIndex = (currentPage - 1) * cardsPerPage;
   const endIndex = startIndex + cardsPerPage;
   // 페이징 핸들링 과정 끝
-  
+
   const WorldMapStyle = styled.div`
     display: flex;
     justify-content: center;
@@ -132,13 +132,12 @@ export default function WorldMap() {
       white-space: nowrap;
     }
   `;
-  
+
   // const FadeInWrapper = styled.div`
   //   animation: ${fadeIn} 1s ease-in-out;
   // `;
-  
-  const Button = styled.button`
 
+  const Button = styled.button`
     width: 75px;
     padding: 13px;
     display: block;
@@ -167,7 +166,7 @@ export default function WorldMap() {
     display: flex;
     flex-direction: column;
   `;
-  
+
   return (
     <div>
       {/*<FadeInWrapper>*/}

@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from "react";
 import styled, {keyframes} from "styled-components";
 import Card from "../components/Card";
-import worldMapImage from "../assets/worldMapImage.png";
 import worldMapBackgroundImage from "../assets/worldMapBackgroundImage.jpeg";
+import worldMapImage from "../assets/worldMapImage.png";
 import {getNewsData} from "../service/getNewsData";
 import {getCountryFlag} from "../utils/getCountryFlag";
 import {coordsData} from "../utils/coordsData";
@@ -33,10 +33,10 @@ const blinkAnimation = keyframes`
 export default function WorldMap() {
   const [newsData, setNewsData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const cardsPerPage = 3;
-
   const [hoveredDotId, setHoveredDotId] = useState(null);
-
+  const [redDots, setRedDots] = useState([]);
+  const cardsPerPage = 6;
+  
   useEffect(() => {
     async function fetchData() {
       const data = await getNewsData();
@@ -47,8 +47,6 @@ export default function WorldMap() {
   }, []);
 
   // RedDot 설정 시작
-  const [redDots, setRedDots] = useState([]);
-
   useEffect(() => {
     if (newsData.length > 0) {
       const sortedData = newsData.slice().sort((a, b) => b.visit_count - a.visit_count);
@@ -87,30 +85,23 @@ export default function WorldMap() {
     justify-content: center;
     align-items: center;
     width: 100vw;
-    height: 100vh;
+    height: 2000px;
     background-image: url(${worldMapBackgroundImage});
     background-size: auto;
     background-position: center;
     background-repeat: repeat;
   `;
-
-  const CardsContainer = styled.div`
-    display: inline-grid;
-    grid-template-columns: repeat(3, 1fr);
-    row-gap: 20px;
-    column-gap: 100px;
   
-  `;
-
   const WorldMapImageStyle = styled.div`
     position: relative;
     width: 1200px;
+    bottom: 50px;
     height: 674px;
     background-image: url(${worldMapImage});
     background-size: cover;
     background-position: center;
   `;
-
+  
   const RedDot = styled.div`
     position: absolute;
     width: ${(props) => Math.min(props.size, props.maxSize)}px; // 최대 크기 제한
@@ -149,7 +140,7 @@ export default function WorldMap() {
   const Button = styled.button`
     width: 75px;
     padding: 13px;
-    display: inline;
+    display: block;
     border: none;
     background-color: #66CCC5;
     color: white;
@@ -158,23 +149,36 @@ export default function WorldMap() {
     border-radius: 7px;
     font-size: 20px;
     margin: 0px 35px;
-    
+
     &:hover {
       background-color: #8de3dd;
     }
   `;
-
+  
+  const CardsContainer = styled.div`
+    display: inline-grid;
+    grid-template-columns: repeat(3, 1fr);
+    row-gap: 20px;
+    column-gap: 100px;
+  `;
+  
   const Flex = styled.div`
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 700px;
+    flex-direction: column;
   `;
 
   return (
     <div>
       {/*<FadeInWrapper>*/}
-        <WorldMapStyle>
+      {/*</FadeInWrapper>*/}
+      
+      <WorldMapStyle>
+        
+        <div style={{marginTop: "700px", marginLeft: "100px"}}>
+          <Button onClick={handlePrevPage}>이전</Button>
+        </div>
+        
+        <Flex>
           <WorldMapImageStyle>
             {redDots.map((circle) => (
               <RedDot
@@ -192,27 +196,26 @@ export default function WorldMap() {
               />
             ))}
           </WorldMapImageStyle>
-        </WorldMapStyle>
-      {/*</FadeInWrapper>*/}
-      <br/>
-
-      {/*TODO: ?. 옵셔널 체이닝 연산자 사용 시 정상 동작 -> 왜 그런지?*/}
-      {/*<h1>{newsData[1].created_at}</h1>*/}
-
-      <h1>최신 업데이트 : {newsData[1]?.created_at} </h1>
-      <Flex>
-        <div>
-          <Button onClick={handlePrevPage}>이전</Button>
-        </div>
-        <CardsContainer>
-          {newsData.slice(startIndex, endIndex).map((data) => (
-            <Card key={data.id} data={data}/>
-          ))}
-        </CardsContainer>
-        <div>
+          
+          {/*TODO: ?. 옵셔널 체이닝 연산자 사용 시 정상 동작 -> 왜 그런지?*/}
+          {/*<h1>최신 업데이트 : {newsData[1].created_at} </h1>*/}
+          <h1 style={{color: "white"}}>최신 업데이트 : {newsData[1]?.created_at.slice(0, 10)} </h1>
+          <br/>
+          <br/>
+          
+          <CardsContainer>
+            {newsData.slice(startIndex, endIndex).map((data) => (
+              <Card key={data.id} data={data}/>
+            ))}
+          </CardsContainer>
+        
+        </Flex>
+        
+        <div style={{marginTop: "700px", marginRight: "100px"}}>
           <Button onClick={handleNextPage}>다음</Button>
         </div>
-      </Flex>
+      
+      </WorldMapStyle>
     </div>
   );
 }

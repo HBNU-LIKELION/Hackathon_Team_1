@@ -1,4 +1,3 @@
-import React from "react";
 import minimap from "../assets/miniWorldMapImage.png";
 
 export default function FirstModal() {

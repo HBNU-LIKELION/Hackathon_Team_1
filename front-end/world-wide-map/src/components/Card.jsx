@@ -7,6 +7,7 @@ import {useNavigate} from "react-router-dom";
 export default function Card({data}) {
   
   const navigate = useNavigate();
+  
   const handleCardClick = () => {
     navigate(`/detail/${data.id}`, {state: data});
   };
@@ -17,16 +18,17 @@ export default function Card({data}) {
     align-items: center;
     width: 100%;
     max-width: 325px;
-    height: 450px;
+    height: 400px;
     text-align: center;
     border-radius: 7px;
     border: 2px solid black;
     position: relative;
     transition: transform 0.75s;
     font-size: 17px;
+    background-color: white;
 
     &:hover {
-      transform: translateY(-20px);
+      transform: translateY(-10px);
     }
   `;
   
@@ -42,7 +44,6 @@ export default function Card({data}) {
   const CardImage = styled.img`
     width: 100%;
     height: 85%;
-
     object-fit: cover;
     border-radius: 7px 7px 0 0;
     z-index: 1;
@@ -69,7 +70,6 @@ export default function Card({data}) {
         <IconWrapper>{getCountryFlag(data.country)}</IconWrapper>
         <CardContent>
           <Title>{truncateTitle(data.title)}</Title>
-          
           <Country>국가 : {data.country}</Country>
         </CardContent>
       </CardItem>

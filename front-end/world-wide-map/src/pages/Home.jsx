@@ -3,11 +3,8 @@ import globe from "../assets/globe.png";
 import styled, {keyframes} from "styled-components";
 import {useNavigate} from "react-router-dom";
 import Modal from "../components/Modal";
-import minimap from "../assets/miniWorldMapImage.png";
-import miniCardImage from "../assets/miniCardImage.png"
 import FirstModal from "../components/FirstModal";
 import SecondModal from "../components/SecondModal";
-
 
 const rotate = keyframes`
   from {
@@ -17,6 +14,7 @@ const rotate = keyframes`
     transform: rotateY(360deg);
   }
 `;
+
 export default function Home() {
   
   const navigate = useNavigate();
@@ -27,19 +25,22 @@ export default function Home() {
   const handleOpenModal = () => {
     setIsModalOpen(true);
   };
+  
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
+  
   const handleModalButtonClick = () => {
     setIsModalOpen2(true);
   };
   
-  
   //두번째 모달을 위한 코드
   const [isModalOpen2, setIsModalOpen2] = useState(false);
+  
   const handleCloseModal2 = () => {
     setIsModalOpen2(false);
   };
+  
   const handleModalButtonClick2 = () => {
     navigate("/worldmap");
   };
@@ -54,6 +55,7 @@ export default function Home() {
     cursor: pointer;
     border-radius: 7px;
     font-size: 20px;
+
     &:hover {
       background-color: #8de3dd;
     }
@@ -73,16 +75,17 @@ export default function Home() {
     width: 300px;
   `;
   
-  
   return (
     
     <div className="my-component">
       
       <Background>
         <div id="box">
-          <p style={{color: "white", paddingTop: "80px", fontStyle: "italic", fontSize: "48px"}}><font
-            style={{color: "#66CCC5"}}>N</font>ews <font style={{color: "#66CCC5"}}>B</font>road <font
-            style={{color: "#66CCC5"}}>A</font>nywhere !</p>
+          <p style={{color: "white", paddingTop: "80px", fontStyle: "italic", fontSize: "48px"}}>
+            <font style={{color: "#66CCC5"}}>N</font>ews
+            <font style={{color: "#66CCC5"}}>B</font>road
+            <font style={{color: "#66CCC5"}}>A</font>nywhere !
+          </p>
           <RotatingImage src={globe} alt="Rotating Globe"/>
         </div>
         
@@ -106,9 +109,12 @@ export default function Home() {
           onClose={handleCloseModal2}
           onButtonClick={handleModalButtonClick2}
           buttonText="시작하기"
+          disableAnimation={true}
         >
           <SecondModal/>
+        
         </Modal>
+      
       </Background>
     </div>
   );

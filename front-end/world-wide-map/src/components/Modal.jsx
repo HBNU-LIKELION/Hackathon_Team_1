@@ -1,7 +1,7 @@
 import React from "react";
 import styled, {keyframes} from "styled-components";
 
-export default function Modal({isOpen, onClose, onButtonClick, buttonText, children}) {
+export default function Modal({isOpen, onClose, onButtonClick, buttonText, children, disableAnimation}) {
   const handleButtonClick = () => {
     onClose();
     onButtonClick();
@@ -30,7 +30,7 @@ export default function Modal({isOpen, onClose, onButtonClick, buttonText, child
     display: flex;
     align-items: center;
     justify-content: center;
-    animation: ${slideIn} 0.3s ease-out;
+    animation: ${props => (props.disableAnimation ? "none" : slideIn)}  0.3s ease-out;
   `;
   
   const ModalContent = styled.div`
@@ -39,7 +39,7 @@ export default function Modal({isOpen, onClose, onButtonClick, buttonText, child
     border-radius: 8px;
   `;
   const ModalButton = styled.button`
-    width: 87.5%;
+    width: 584px;
     padding: 13px;
     border: none;
     background-color: #66CCC5;
@@ -55,7 +55,7 @@ export default function Modal({isOpen, onClose, onButtonClick, buttonText, child
   `;
   
   return (
-    <ModalOverlay>
+    <ModalOverlay disableAnimation={disableAnimation}>
       <ModalContent>
         {children}
         <ModalButton onClick={handleButtonClick}>{buttonText}</ModalButton>

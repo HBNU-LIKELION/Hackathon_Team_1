@@ -122,7 +122,7 @@ export default function WorldMap() {
       left: 50%;
       transform: translateX(-50%);
       background-color: rgba(0, 0, 0, 0);
-      color: black;
+      color: red;
       font-weight: bold;
       padding: 8px;
       border-radius: 4px;

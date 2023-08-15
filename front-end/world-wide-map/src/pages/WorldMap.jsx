@@ -21,16 +21,6 @@ const blinkAnimation = keyframes`
   }
 `;
 
-// fadeIn 애니메이션 정의
-// const fadeIn = keyframes`
-//   from {
-//     opacity: 0;
-//   }
-//   to {
-//     opacity: 1;
-//   }
-// `;
-
 export default function WorldMap() {
   const [newsData, setNewsData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -43,10 +33,9 @@ export default function WorldMap() {
       const data = await getNewsData();
       setNewsData(data);
     }
-
     fetchData();
   }, []);
-
+  
   // RedDot 설정 시작
   useEffect(() => {
     if (newsData.length > 0) {
@@ -65,22 +54,22 @@ export default function WorldMap() {
     }
   }, [newsData]);
   // RedDot 설정 끝
-
+  
   // 페이지 핸들링 과정 시작
   const totalPageCount = Math.ceil(newsData.length / cardsPerPage);
-
+  
   const handleNextPage = () => {
     setCurrentPage((prevPage) => (prevPage === totalPageCount ? 1 : prevPage + 1));
   };
-
+  
   const handlePrevPage = () => {
     setCurrentPage((prevPage) => (prevPage === 1 ? totalPageCount : prevPage - 1));
   };
-
+  
   const startIndex = (currentPage - 1) * cardsPerPage;
   const endIndex = startIndex + cardsPerPage;
   // 페이징 핸들링 과정 끝
-
+  
   const WorldMapStyle = styled.div`
     display: flex;
     justify-content: center;
@@ -116,9 +105,9 @@ export default function WorldMap() {
     cursor: pointer;
 
     &::after {
-      content: "! ! !";
+      content: "${(props) => getCountryFlag(props.country)}";
       position: absolute;
-      bottom: 110%;
+      bottom: 70%;
       left: 50%;
       transform: translateX(-50%);
       background-color: rgba(0, 0, 0, 0);
@@ -129,7 +118,7 @@ export default function WorldMap() {
       font-size: 25px;
       white-space: nowrap;
     }
-    
+
     &:hover {
       cursor: zoom-in;
     }
@@ -149,11 +138,7 @@ export default function WorldMap() {
       white-space: nowrap;
     }
   `;
-
-  // const FadeInWrapper = styled.div`
-  //   animation: ${fadeIn} 1s ease-in-out;
-  // `;
-
+  
   const Button = styled.button`
     width: 75px;
     padding: 13px;
@@ -183,11 +168,9 @@ export default function WorldMap() {
     display: flex;
     flex-direction: column;
   `;
-
+  
   return (
     <div>
-      {/*<FadeInWrapper>*/}
-      {/*</FadeInWrapper>*/}
       
       <WorldMapStyle>
         
@@ -216,6 +199,7 @@ export default function WorldMap() {
           
           {/*TODO: ?. 옵셔널 체이닝 연산자 사용 시 정상 동작 -> 왜 그런지?*/}
           {/*<h1>최신 업데이트 : {newsData[1].created_at} </h1>*/}
+          <hr style={{marginBottom: "30px"}}/>
           <h1 style={{color: "white"}}>최신 업데이트 : {newsData[1]?.created_at.slice(0, 10)} </h1>
           <br/>
           <br/>

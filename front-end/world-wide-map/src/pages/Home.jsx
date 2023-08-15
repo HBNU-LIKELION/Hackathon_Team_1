@@ -46,7 +46,7 @@ export default function Home() {
   };
   
   const Button = styled.button`
-    width: 50%;
+    width: 400px;
     padding: 13px;
     border: none;
     background-color: #66CCC5;
@@ -82,8 +82,8 @@ export default function Home() {
       <Background>
         <div id="box">
           <p style={{color: "white", paddingTop: "80px", fontStyle: "italic", fontSize: "48px"}}>
-            <font style={{color: "#66CCC5"}}>N</font>ews
-            <font style={{color: "#66CCC5"}}>B</font>road
+            <font style={{color: "#66CCC5"}}>N</font>ews &nbsp;
+            <font style={{color: "#66CCC5"}}>B</font>road &nbsp;
             <font style={{color: "#66CCC5"}}>A</font>nywhere !
           </p>
           <RotatingImage src={globe} alt="Rotating Globe"/>

@@ -61,7 +61,7 @@ export default function Detail() {
         <br/>
         <Flex>
           
-          <b style={{fontSize: "20px", padding: "0 300px"}}>
+          <b style={{fontSize: "20px"}}>
             <hr/>
             <br/>
             {formattedContent}

@@ -74,7 +74,7 @@ export default function WorldMap() {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100vw;
+    width: 1600px;
     height: 2000px;
     background-image: url(${worldMapBackgroundImage});
     background-size: auto;

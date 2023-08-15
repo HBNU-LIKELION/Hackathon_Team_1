@@ -1,11 +1,12 @@
-import minimap from "../assets/miniWorldMapImage.png";
+import modalVideo from "../assets/modalVideo.mp4"
 
 export default function FirstModal() {
   return (
     <div>
-      <p style={{fontWeight: "bold"}}>세계지도의 빨간 점은 조회수 Top 3 지역을 보여줍니다. </p>
-      <p style={{fontWeight: "bold"}}>마우스를 올려 펼쳐보세요!</p>
-      <img src={minimap} alt="" style={{borderRadius: "10px"}}/>
+      <p style={{fontWeight: "bold"}}>빨간점의 크기는  뉴스 조회수를 나타냅니다. </p>
+      <p style={{fontWeight: "bold"}}>마우스를 올려 확인해보세요!</p>
+      <br/>
+      <video src={modalVideo} style={{borderRadius: "10px",width:"584px",height:"337px"}} autoPlay loop></video>
     </div>
   );
 }

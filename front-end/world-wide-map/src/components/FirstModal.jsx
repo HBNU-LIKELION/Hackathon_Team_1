@@ -6,7 +6,7 @@ export default function FirstModal() {
       <p style={{fontWeight: "bold"}}>빨간점의 크기는  뉴스 조회수를 나타냅니다. </p>
       <p style={{fontWeight: "bold"}}>마우스를 올려 확인해보세요!</p>
       <br/>
-      <video src={modalVideo} style={{borderRadius: "15px",width:"584px",height:"337px"}} muted loop autoPlay></video>
+      <video src={modalVideo} style={{borderRadius: "15px",width:"584px",height:"337px"}} muted loop autoPlay playsInline></video>
     </div>
   );
 }

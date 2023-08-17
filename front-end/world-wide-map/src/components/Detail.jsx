@@ -50,14 +50,18 @@ export default function Detail() {
   return (
     <div>
       <div>
+        
         <img src={cardData.img} alt="News" style={{width: "70%", borderRadius: "10px", marginTop: "30px"}}/>
         
+        
         <IconWrapper><img src={getCountryFlag(cardData.country)}/></IconWrapper>
-      
+        
       </div>
       <div>
-        
+  
+        <span style={{fontSize:"30px",fontWeight:"bold"}}>이 기사의 현재 조회 수 : {cardData.visit_count}</span>
         <Title>{cardData.title}</Title>
+        
         <br/>
         <Flex>
           

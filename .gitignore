@@ -385,5 +385,5 @@ $RECYCLE.BIN/
 # End of https://www.toptal.com/developers/gitignore/api/Macos,Windows,VisualStudioCode,Python,react,WebStorm
 
 # papago userdata
-back-end/crawling&transelate/secret.py
-back-end/world_issue_api/papago.py
+back-end/functions/secret.py
+back-end/world_issue_api/drfsecret.py

@@ -26,7 +26,8 @@ export default function WorldMap() {
   const [currentPage, setCurrentPage] = useState(1);
   const [hoveredDotId, setHoveredDotId] = useState(null);
   const [redDots, setRedDots] = useState([]);
-  
+  const [shuffledNewsData, setShuffledNewsData] = useState([]);
+
   const cardsPerPage = 6;
   
   useEffect(() => {
@@ -77,7 +78,24 @@ export default function WorldMap() {
   const startIndex = (currentPage - 1) * cardsPerPage;
   const endIndex = startIndex + cardsPerPage;
   // 페이징 핸들링 과정 끝
-  
+
+  useEffect(() => {
+    if (newsData.length > 0) {
+      const shuffledData = shuffleArray(newsData);
+      setShuffledNewsData(shuffledData);
+    }
+  }, [newsData]);
+
+  function shuffleArray(array) {
+    const shuffledArray = array.slice(); // 배열 복사본 생성
+    for (let i = shuffledArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]]; // 값 교환
+    }
+    return shuffledArray;
+  }
+
+
   const WorldMapStyle = styled.div`
     display: flex;
     justify-content: center;
@@ -255,7 +273,7 @@ export default function WorldMap() {
             <br/>
             
             <CardsContainer>
-              {newsData.slice(startIndex, endIndex).map((data) => (
+              {shuffledNewsData.slice(startIndex, endIndex).map((data) => (
                 <Card key={data.id} data={data}/>
               ))}
             </CardsContainer>

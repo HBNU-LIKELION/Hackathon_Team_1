@@ -33,6 +33,7 @@ export default function WorldMap() {
       const data = await getNewsData();
       setNewsData(data);
     }
+    
     fetchData();
   }, []);
   
@@ -74,7 +75,7 @@ export default function WorldMap() {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 1600px;
+    width: 6000px;
     height: 2000px;
     background-image: url(${worldMapBackgroundImage});
     background-size: auto;
@@ -164,13 +165,19 @@ export default function WorldMap() {
     column-gap: 100px;
   `;
   
+  const FlexWrapper = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  `;
+  
   const Flex = styled.div`
     display: flex;
     flex-direction: column;
   `;
   
   return (
-    <div>
+    <FlexWrapper>
       
       <WorldMapStyle>
         
@@ -217,6 +224,6 @@ export default function WorldMap() {
         </div>
       
       </WorldMapStyle>
-    </div>
+    </FlexWrapper>
   );
 }

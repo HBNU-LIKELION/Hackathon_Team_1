@@ -1,7 +1,7 @@
 # News Broad Anywhere
 
 <div align="center">
-  <img width="600" alt="image" src="https://github.com/HBNU-LIKELION/Hackathon_Team_1/assets/21968811/8d40ec1d-9915-44eb-9a6a-1f8b04aab067">
+  <img width="600" alt="image" src="https://github.com/HBNU-LIKELION/Hackathon_Team_1/assets/21968811/eb158824-97d3-49da-8af1-a86a7b5425a3">
 
 
 

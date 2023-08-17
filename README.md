@@ -66,7 +66,9 @@
 ## 🔨 Skills
 
 <div align="center">
-  <img width="60%" alt="image" src="https://github.com/JUNOSHON/rebase-practice/assets/67476544/c564299f-50c9-42f6-9c9a-49ed7ae5902c">
+<img width="888" alt="image" src="https://github.com/HBNU-LIKELION/Hackathon_Team_1/assets/21968811/6ae11e38-26f0-4782-bd6c-475351faf481">
+
+
 
 
 
@@ -99,3 +101,25 @@
         "created_at": "2023-08-17 20:53"
 },
 ```
+## 언론사
+
+| index | 나라       | url                                      |
+|-------|------------|------------------------------------------|
+| 1     | 미국       | https://edition.cnn.com/us               |
+| 2     | 일본       | https://mainichi.jp/                     |
+| 3     | 독일       | https://www.welt.de/                     |
+| 4     | 인도       | https://www.thequint.com/international   |
+| 5     | 영국       | https://news.sky.com/uk                  |
+| 6     | 프랑스     | https://www.lemonde.fr/                  |
+| 7     | 이탈리아   | https://www.repubblica.it/               |
+| 8     | 캐나다     | https://www.thestar.com/news/canada.html |
+| 9     | 브라질     | https://www.uol.com.br/                  |
+| 10    | 러시아     | https://ria.ru/'                         |
+| 11    | 대한민국   | https://www.joongang.co.kr/'             |
+| 12    | 베트남     | https://thanhnien.vn'                    |
+| 13    | 호주       | https://www.abc.net.au/news/australia    |
+| 14    | 맥시코     | https://mexiconewsdaily.com/             |
+| 15    | 스페인     | https://cincodias.elpais.com/            |
+| 16    | 인도네시아 | https://www.kompas.com/                  |
+| 17    | 네덜란드   | https://www.nrc.nl/                      |
+| 18    | 필리핀     | https://www.philstar.com/                |

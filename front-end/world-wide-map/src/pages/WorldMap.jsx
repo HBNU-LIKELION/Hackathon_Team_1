@@ -100,7 +100,7 @@ export default function WorldMap() {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 6000px;
+    width: 100vw;
     height: 2000px;
     background-image: url(${worldMapBackgroundImage});
     background-size: auto;
@@ -207,7 +207,7 @@ export default function WorldMap() {
   `;
   
   const Footer = styled.footer`
-    width: 6000px;
+    width: 100vw;
     height: 100px;
     background-color: #2F4282;
     color: white;
@@ -237,12 +237,12 @@ export default function WorldMap() {
   // }, []);
   
   return (
-    <div>
+    
       <FlexWrapper>
         
         <WorldMapStyle>
           
-          <div style={{marginTop: "700px", marginLeft: "100px"}}>
+          <div style={{marginTop: "600px", marginLeft: "100px"}}>
             <Button onClick={handlePrevPage}>이전</Button>
           </div>
           
@@ -292,9 +292,6 @@ export default function WorldMap() {
         </Footer>
         
       </FlexWrapper>
-  
-     
-      
-    </div>
+    
   );
 }

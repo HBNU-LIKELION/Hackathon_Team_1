@@ -1,8 +1,7 @@
 # News Broad Anywhere
 
 <div align="center">
-  <img width="480" alt="image" src="https://github.com/JUNOSHON/rebase-practice/assets/67476544/bf61c10c-7e14-47d9-88ca-4767bd096990">
-
+  <img width="600" alt="image" src="https://github.com/HBNU-LIKELION/Hackathon_Team_1/assets/21968811/8d40ec1d-9915-44eb-9a6a-1f8b04aab067">
 
 
 

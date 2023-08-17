@@ -52,7 +52,7 @@ export default function Detail() {
       <div>
         <img src={cardData.img} alt="News" style={{width: "70%", borderRadius: "10px", marginTop: "30px"}}/>
         
-        <IconWrapper>{getCountryFlag(cardData.country)}</IconWrapper>
+        <IconWrapper><img src={getCountryFlag(cardData.country)}/></IconWrapper>
       
       </div>
       <div>

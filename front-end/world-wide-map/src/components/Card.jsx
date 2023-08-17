@@ -25,11 +25,10 @@ export default function Card({data}) {
     flex-direction: column;
     align-items: center;
     width: 100%;
-    max-width: 325px;
-    height: 400px;
+    max-width: 360px;
+    height: 350px;
     text-align: center;
     border-radius: 7px;
-    border: 2px solid black;
     position: relative;
     transition: transform 0.75s;
     font-size: 17px;
@@ -45,8 +44,6 @@ export default function Card({data}) {
     top: 10px;
     left: 10px;
     z-index: 2;
-    font-size: 70px;
-    border: none;
   `;
   
   const CardImage = styled.img`
@@ -63,19 +60,19 @@ export default function Card({data}) {
   `;
   
   const Title = styled.div`
-    font-size: 28px;
+    margin-bottom: 10px;
+    font-size: 20px;
   `;
   
   const Country = styled.span`
-    font-size: 15px; // 고정된 글자 크기 설정
+    font-size: 13px; // 고정된 글자 크기 설정
   `;
   
-  //TODO : src의 alt 속성에 들어갈 이미지 필요
   return (
     <Fragment>
       <CardItem key={data.id} onClick = {handleCardClick}>
-        <CardImage src={data.img} alt="추후 수정 필요"/>
-        <IconWrapper>{getCountryFlag(data.country)}</IconWrapper>
+        <CardImage src={data.img}/>
+        <IconWrapper><img src={getCountryFlag(data.country)}/></IconWrapper>
         <CardContent>
           <Title>{truncateTitle(data.title)}</Title>
           <Country>국가 : {data.country}</Country>

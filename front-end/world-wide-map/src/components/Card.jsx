@@ -45,8 +45,6 @@ export default function Card({data}) {
     top: 10px;
     left: 10px;
     z-index: 2;
-    font-size: 70px;
-    border: none;
   `;
   
   const CardImage = styled.img`
@@ -70,12 +68,11 @@ export default function Card({data}) {
     font-size: 15px; // 고정된 글자 크기 설정
   `;
   
-  //TODO : src의 alt 속성에 들어갈 이미지 필요
   return (
     <Fragment>
       <CardItem key={data.id} onClick = {handleCardClick}>
-        <CardImage src={data.img} alt="추후 수정 필요"/>
-        <IconWrapper>{getCountryFlag(data.country)}</IconWrapper>
+        <CardImage src={data.img}/>
+        <IconWrapper><img src={getCountryFlag(data.country)}/></IconWrapper>
         <CardContent>
           <Title>{truncateTitle(data.title)}</Title>
           <Country>국가 : {data.country}</Country>

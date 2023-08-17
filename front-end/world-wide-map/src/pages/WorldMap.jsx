@@ -106,17 +106,17 @@ export default function WorldMap() {
     cursor: pointer;
 
     &::after {
-      content: "${(props) => getCountryFlag(props.country)}";
+      content: "";
+      background-image: ${(props) => `url(${getCountryFlag(props.country)})`};
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+      background-position: center;      
       position: absolute;
       bottom: 70%;
       left: 50%;
       transform: translateX(-50%);
-      background-color: rgba(0, 0, 0, 0);
-      color: red;
-      font-weight: bold;
-      padding: 8px;
+      padding: 30px;
       border-radius: 4px;
-      font-size: 25px;
       white-space: nowrap;
     }
 
@@ -125,11 +125,15 @@ export default function WorldMap() {
     }
 
     &:hover::after {
-      content: "${(props) => getCountryFlag(props.country)}  ${(props) => truncateTitle(props.title)}";
+      content: "${(props) => truncateTitle(props.title)}";
+      background-image: ${(props) => `url(${getCountryFlag(props.country)})`};
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
       position: absolute;
       bottom: 110%;
       left: 50%;
-      transform: translateX(-50%);
+      transform: translateX(-50% -50%);
       background-color: rgba(0, 0, 0, 0.8);
       color: white;
       font-weight: normal;

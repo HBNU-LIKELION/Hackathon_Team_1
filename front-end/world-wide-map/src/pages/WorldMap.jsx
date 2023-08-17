@@ -81,7 +81,7 @@ export default function WorldMap() {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 6000px;
+    width: 100%;
     height: 2000px;
     background-image: url(${worldMapBackgroundImage});
     background-size: auto;
@@ -116,7 +116,7 @@ export default function WorldMap() {
       background-image: ${(props) => `url(${getCountryFlag(props.country)})`};
       background-size: 100% 100%;
       background-repeat: no-repeat;
-      background-position: center;      
+      background-position: center;
       position: absolute;
       bottom: 70%;
       left: 50%;

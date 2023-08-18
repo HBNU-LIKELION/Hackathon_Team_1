@@ -7,6 +7,7 @@ import {getNewsData} from "../service/getNewsData";
 import {getCountryFlag} from "../utils/getCountryFlag";
 import {coordsData} from "../utils/coordsData";
 import {truncateTitle} from "../utils/truncateTitle";
+import {useNavigate} from "react-router-dom";
 
 // Notice: 이 애니메이션 정의는 컴포넌트 밖에 정의해야함.
 const blinkAnimation = keyframes`
@@ -27,7 +28,6 @@ export default function WorldMap() {
   const [hoveredDotId, setHoveredDotId] = useState(null);
   const [redDots, setRedDots] = useState([]);
   const [shuffledNewsData, setShuffledNewsData] = useState([]);
-
   const cardsPerPage = 6;
   
   useEffect(() => {
@@ -100,8 +100,8 @@ export default function WorldMap() {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100vw;
-    height: 2000px;
+    width: 1500px;
+    height: 1800px;
     background-image: url(${worldMapBackgroundImage});
     background-size: auto;
     background-position: center;
@@ -207,7 +207,7 @@ export default function WorldMap() {
   `;
   
   const Footer = styled.footer`
-    width: 100vw;
+    width: 1500px;
     height: 100px;
     background-color: #2F4282;
     color: white;

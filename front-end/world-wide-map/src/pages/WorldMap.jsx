@@ -97,29 +97,47 @@ export default function WorldMap() {
   
   
   const WorldMapStyle = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 1800px;
-    height: 1800px;
-    background-image: url(${worldMapBackgroundImage});
-    background-size: auto;
-    background-position: center;
-    background-repeat: repeat;
-    overflow-x: hidden;
-
-    @media (max-width: 768px) {
-      /* 화면 너비가 768px 이하인 경우에 적용 */
+    @media (min-width: 1024px) {
+      /* 화면 너비가 1024px 이상인 경우에 적용하는 스타일 */
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 800px;
+      width: 2400px;
+      height: 1800px;
+      background-image: url(${worldMapBackgroundImage});
+      background-size: auto;
+      background-position: center;
+      background-repeat: repeat;
+      overflow-x: hidden;
+    }
+
+
+    @media (min-width: 769px) and (max-width: 1023px) {
+      /* 화면 너비가 769px 이상 1023px 이하인 경우에 적용하는 스타일 */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 1600px;
       height: 1000px; /* 변경 */
       background-image: url(${worldMapBackgroundImage});
       background-size: auto;
       background-position: center;
       background-repeat: repeat;
     }
+  }
+
+  @media (max-width: 768px) {
+    /* 화면 너비가 768px 이하인 경우에 적용 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 800px;
+    height: 1000px; /* 변경 */
+    background-image: url(${worldMapBackgroundImage});
+    background-size: auto;
+    background-position: center;
+    background-repeat: repeat;
+  }
   `;
   
   const WorldMapImageStyle = styled.div`
@@ -222,20 +240,41 @@ export default function WorldMap() {
   `;
   
   const Footer = styled.footer`
-    width: 1800px;
-    height: 100px;
-    background-color: #2F4282;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    bottom: 0;
-    left: 0;
-    overflow-x: hidden;
+
+
+    @media (min-width: 1024px) {
+      /* 화면 너비가 1024px 이상인 경우에 적용하는 스타일 */
+      width: 2400px;
+      height: 100px;
+      background-color: #2F4282;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      bottom: 0;
+      left: 0;
+    }
+
+
+    @media (min-width: 769px) and (max-width: 1023px) {
+      /* 화면 너비가 769px 이상 1023px 이하인 경우에 적용하는 스타일 */
+      width: 1600px;
+      height: 100px;
+      background-color: #2F4282;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      bottom: 0;
+      left: 0;
+    }
+
+
     @media (max-width: 768px) {
       /* 화면 너비가 768px 이하인 경우에 적용 */
-      width: 1800px;
+      width: 800px;
       height: 100px;
       background-color: #2F4282;
       color: white;
@@ -247,6 +286,7 @@ export default function WorldMap() {
       left: 0;
     }
   `;
+  
   
   // const [footerOpacity, setFooterOpacity] = useState(0); // 초기값 0
   

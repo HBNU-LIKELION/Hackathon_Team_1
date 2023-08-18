@@ -78,14 +78,14 @@ export default function WorldMap() {
   const startIndex = (currentPage - 1) * cardsPerPage;
   const endIndex = startIndex + cardsPerPage;
   // 페이징 핸들링 과정 끝
-
+  
   useEffect(() => {
     if (newsData.length > 0) {
       const shuffledData = shuffleArray(newsData);
       setShuffledNewsData(shuffledData);
     }
   }, [newsData]);
-
+  
   function shuffleArray(array) {
     const shuffledArray = array.slice(); // 배열 복사본 생성
     for (let i = shuffledArray.length - 1; i > 0; i--) {
@@ -94,8 +94,8 @@ export default function WorldMap() {
     }
     return shuffledArray;
   }
-
-
+  
+  
   const WorldMapStyle = styled.div`
     display: flex;
     justify-content: center;
@@ -106,6 +106,19 @@ export default function WorldMap() {
     background-size: auto;
     background-position: center;
     background-repeat: repeat;
+
+    @media (max-width: 768px) {
+      /* 화면 너비가 768px 이하인 경우에 적용 */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 800px;
+      height: 1000px; /* 변경 */
+      background-image: url(${worldMapBackgroundImage});
+      background-size: auto;
+      background-position: center;
+      background-repeat: repeat;
+    }
   `;
   
   const WorldMapImageStyle = styled.div`
@@ -190,8 +203,8 @@ export default function WorldMap() {
   const CardsContainer = styled.div`
     display: inline-grid;
     grid-template-columns: repeat(3, 1fr);
-    row-gap: 20px;
-    column-gap: 100px;
+    row-gap: 30px;
+    column-gap: 60px;
   `;
   
   const FlexWrapper = styled.div`
@@ -199,6 +212,7 @@ export default function WorldMap() {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    //overflow-x: hidden;
   `;
   
   const Flex = styled.div`
@@ -217,6 +231,19 @@ export default function WorldMap() {
     flex-direction: column;
     bottom: 0;
     left: 0;
+    @media (max-width: 768px) {
+      /* 화면 너비가 768px 이하인 경우에 적용 */
+      width: 1800px;
+      height: 100px;
+      background-color: #2F4282;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      bottom: 0;
+      left: 0;
+    }
   `;
   
   // const [footerOpacity, setFooterOpacity] = useState(0); // 초기값 0
@@ -238,60 +265,61 @@ export default function WorldMap() {
   
   return (
     
-      <FlexWrapper>
-        
-        <WorldMapStyle>
-          
-          <div style={{marginTop: "600px", marginLeft: "100px"}}>
-            <Button onClick={handlePrevPage}>이전</Button>
-          </div>
-          
-          <Flex>
-            <WorldMapImageStyle>
-              {redDots.map((circle) => (
-                <RedDot
-                  key={circle.id}
-                  top={circle.top}
-                  left={circle.left}
-                  zIndex={circle.zIndex}
-                  size={circle.size}
-                  title={circle.title}
-                  country={circle.country}
-                  maxSize={circle.maxSize}
-                  isHovered={hoveredDotId === circle.id} // hoveredDotId는 state로 관리되는 값
-                  onMouseEnter={() => setHoveredDotId(circle.id)}
-                  onMouseLeave={() => setHoveredDotId(null)}
-                />
-              ))}
-            </WorldMapImageStyle>
-            
-            {/*TODO: ?. 옵셔널 체이닝 연산자 사용 시 정상 동작 -> 왜 그런지?*/}
-            {/*<h1>최신 업데이트 : {newsData[1].created_at} </h1>*/}
-            <hr style={{marginBottom: "30px"}}/>
-            <h1 style={{color: "white"}}>최신 업데이트 : {newsData[1]?.created_at.slice(0, 10)} </h1>
-            <br/>
-            <br/>
-            
-            <CardsContainer>
-              {shuffledNewsData.slice(startIndex, endIndex).map((data) => (
-                <Card key={data.id} data={data}/>
-              ))}
-            </CardsContainer>
-          
-          </Flex>
-          
-          <div style={{marginTop: "700px", marginRight: "100px"}}>
-            <Button onClick={handleNextPage}>다음</Button>
-          </div>
-        
-        </WorldMapStyle>
-        
-        <Footer>
-          <p>© 2023 NewsBroadAnywhere. All rights reserved.</p><br/>
-          <p>Produced by. Yeachan Juno Jaeyoung Juchan</p>
-        </Footer>
-        
-      </FlexWrapper>
+    // <FlexWrapper>
     
+    <div>
+      <WorldMapStyle>
+        
+        <div style={{marginTop: "600px", marginLeft: "100px"}}>
+          <Button onClick={handlePrevPage}>이전</Button>
+        </div>
+        
+        <Flex>
+          <WorldMapImageStyle>
+            {redDots.map((circle) => (
+              <RedDot
+                key={circle.id}
+                top={circle.top}
+                left={circle.left}
+                zIndex={circle.zIndex}
+                size={circle.size}
+                title={circle.title}
+                country={circle.country}
+                maxSize={circle.maxSize}
+                isHovered={hoveredDotId === circle.id} // hoveredDotId는 state로 관리되는 값
+                onMouseEnter={() => setHoveredDotId(circle.id)}
+                onMouseLeave={() => setHoveredDotId(null)}
+              />
+            ))}
+          </WorldMapImageStyle>
+          
+          {/*TODO: ?. 옵셔널 체이닝 연산자 사용 시 정상 동작 -> 왜 그런지?*/}
+          {/*<h1>최신 업데이트 : {newsData[1].created_at} </h1>*/}
+          <hr style={{marginBottom: "30px"}}/>
+          <h1 style={{color: "white"}}>최신 업데이트 : {newsData[1]?.created_at.slice(0, 10)} </h1>
+          <br/>
+          <br/>
+          
+          <CardsContainer>
+            {shuffledNewsData.slice(startIndex, endIndex).map((data) => (
+              <Card key={data.id} data={data}/>
+            ))}
+          </CardsContainer>
+        
+        </Flex>
+        
+        <div style={{marginTop: "700px", marginRight: "100px"}}>
+          <Button onClick={handleNextPage}>다음</Button>
+        </div>
+      
+      </WorldMapStyle>
+      
+      <Footer>
+        <p>© 2023 NewsBroadAnywhere. All rights reserved.</p><br/>
+        <p>Produced by. Yeachan Juno Jaeyoung Juchan</p>
+      </Footer>
+      
+      {/*</FlexWrapper>*/}
+    </div>
   );
 }

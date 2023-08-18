@@ -36,6 +36,7 @@ export default function Card({data}) {
 
     &:hover {
       transform: translateY(-10px);
+      cursor: pointer;
     }
   `;
   

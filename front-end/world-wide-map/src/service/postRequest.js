@@ -1,7 +1,7 @@
 export async function postRequest(data) {
     try {
         console.log(data.id);
-        const apiUrl = `${process.env.REACT_APP_POST}{data.id}/`;
+        const apiUrl = `${process.env.REACT_APP_POST}${data.id}/`;
         //process.env.REACT_APP_API_Server
         const response = await fetch(apiUrl, {
             method: 'POST',

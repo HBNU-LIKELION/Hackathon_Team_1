@@ -1,6 +1,6 @@
 const getNewsData = async () => {
   try {
-    const response = await fetch('http://223.130.139.67:8000/Issue/?format=json');
+    const response = await fetch(process.env.REACT_APP_API_Server);
     const newsData = await response.json();
     return newsData;
   } catch (error) {

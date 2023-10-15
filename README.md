@@ -20,7 +20,7 @@
 
 | BE (팀장, 오예찬)  | FE (팀원, 손준호)  | FE (팀원, 유재영)  | BE (팀원, 김주찬)  |
 |---|---|---|---|
-| <img width="200" alt="image" src="https://github.com/JUNOSHON/rebase-practice/assets/67476544/a6458a8b-5bde-4922-9701-7b1bf9649839">| <img width="200" alt="image" src="https://github.com/JUNOSHON/rebase-practice/assets/67476544/a761ea6c-49f7-4f30-9441-4477f60c1594">|<img width="200" alt="image" src="https://github.com/JUNOSHON/rebase-practice/assets/67476544/8fdc8882-dc1f-4d6f-9e57-911590f2bda8">|<img width="200" alt="image" src="https://github.com/JUNOSHON/rebase-practice/assets/67476544/6c2683ec-42bb-4711-8a8b-006deabbc178">                                                                             
+| <img width="200" alt="image" src="https://github.com/HBNU-LIKELION/Hackathon_Team_1/assets/109587069/4ef08187-217d-4306-bba8-5c2034f2effe">| <img width="200" alt="image" src="https://github.com/HBNU-LIKELION/Hackathon_Team_1/assets/109587069/1e95bcee-9f9f-435f-9660-5089494c1e09">|<img width="200" alt="image" src="https://github.com/HBNU-LIKELION/Hackathon_Team_1/assets/109587069/f3878319-0368-4ff4-b7bb-d74b481d5ff2">|<img width="200" alt="image" src="https://github.com/HBNU-LIKELION/Hackathon_Team_1/assets/109587069/d3fb6566-debf-42fb-a777-dcce524bed99">                                                                             
 
 
 

@@ -27,7 +27,7 @@
 <div markdown="1">
   <br/>
   
-  <strong>[오예찬](https://github.com/dus001228)</strong>
+  <strong>[오예찬](https://github.com/happy-yeachan)</strong>
   
   - 언론사 헤드라인 뉴스 스크래핑 및 크롤링
   - 파파고 API를 활용한 다국어 언어 감지 및 번역
